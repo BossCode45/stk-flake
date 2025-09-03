@@ -32,7 +32,7 @@ in
 
         port = mkOption {
             type = types.int;
-            default = 2759;
+            default = 2757;
             description = ''
         Port for the server. If 0 then it will use the port specified in stk_config.xml. If you want to use a random port set random-server-port to 1 in user config. This port will be opened in the firwall if it is not 0.
             '';
