@@ -100,7 +100,7 @@ for documentation on these properties.
             description = "Super Tux Karts server";
             
             serviceConfig = {
-                ExecStart = "${cfg.package}/bin/supertuxkart --server-config=${serverConfig} --lan-server=nix --network-console --spectators 1";
+                ExecStart = "${cfg.package}/bin/supertuxkart --server-config=${serverConfig} --network-console --spectators 1";
                 ExecStop = "${stopScript}";
                 Restart = "always";
                 User = "stk";
