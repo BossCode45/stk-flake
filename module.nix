@@ -34,7 +34,14 @@ in
             type = types.int;
             default = 2757;
             description = ''
-        Port for the server. If 0 then it will use the port specified in stk_config.xml. If you want to use a random port set random-server-port to 1 in user config. This port will be opened in the firwall if it is not 0.
+        Port for the server. If 0 then it will use the port specified in stk_config.xml. If you want to use a random port set random-server-port to 1 in user config.
+            '';
+        };
+        openPort = mkOption {
+            type = types.bool;
+            default = true;
+            description = ''
+            Open port in the firewall
             '';
         };
 
@@ -62,7 +69,7 @@ for documentation on these properties.
     config = mkIf cfg.enable {
         environment.systemPackages = [ cfg.package ];
 
-        networking.firewall = mkIf (cfg.port != 0) {
+        networking.firewall = mkIf (cfg.port != 0 && cfg.openPort) {
             allowedUDPPorts = [ cfg.port ];
         };
 
@@ -93,7 +100,7 @@ for documentation on these properties.
             description = "Super Tux Karts server";
             
             serviceConfig = {
-                ExecStart = "${cfg.package}/bin/supertuxkart --server-config=${serverConfig} --network-console";
+                ExecStart = "${cfg.package}/bin/supertuxkart --server-config=${serverConfig} --network-console --spectators 1";
                 ExecStop = "${stopScript}";
                 Restart = "always";
                 User = "stk";
