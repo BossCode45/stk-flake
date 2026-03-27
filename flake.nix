@@ -1,7 +1,7 @@
 {
     description = "STK-server";
     inputs = {
-        nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+        nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     };
     outputs = { self, nixpkgs, ... }@inputs:
         let pkgs = nixpkgs.legacyPackages.x86_64-linux;
